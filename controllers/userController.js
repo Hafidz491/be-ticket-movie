@@ -58,8 +58,9 @@ class UserController {
         expiresIn: "1h",
       });
       res.status(201).json({
-        token,
+        message: "Login Berhasil!",
         user: { id: user._id, name: user.name, email: user.email },
+        token,
       });
     } catch (error) {
       res.status(500).json({ message: error.message });
