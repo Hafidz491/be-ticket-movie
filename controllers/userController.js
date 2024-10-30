@@ -66,6 +66,23 @@ class UserController {
       res.status(500).json({ message: error.message });
     }
   }
+
+  static async detailUser(req, res) {
+    try {
+      // get ID
+      const id = req.params.id;
+
+      // checking user id
+      const user = await User.findById(id);
+      if (!user) {
+        return res.status(404).json({ msg: "User not found!" });
+      }
+
+      res.status(201).json(user);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
 }
 
 module.exports = UserController;
