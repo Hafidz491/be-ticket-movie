@@ -2,11 +2,19 @@ const Movie = require("../models/Movie");
 
 class MovieController {
   static async addMovie(req, res) {
-    const movie = await Movie({
-      name: req.body.name,
-      rating: req.body.rating,
-      year: req.body.year,
-      description: req.body.description,
+    const { name, rating, year, description, producer, cast, imageUrl } =
+      req.body;
+
+    const img = `uploads/${imageUrl}`;
+
+    const movie = new Movie({
+      imageUrl: img,
+      name,
+      rating,
+      year,
+      cast,
+      producer,
+      description,
     });
     try {
       const newMovie = await movie.save();
@@ -43,6 +51,13 @@ class MovieController {
       res.status(500).json({ message: error.message });
     }
   }
+
+  // static async bookingMovie(req, res) {
+  //   try {
+  //   } catch (error) {
+  //     res.status(500).json({ message: error.message });
+  //   }
+  // }
 }
 
 module.exports = MovieController;

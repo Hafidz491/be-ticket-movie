@@ -25,6 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 db.connect();
 
+// routes
 app.use("/", indexRouter);
 app.use("/movie", movieRouter);
 app.use("/user", userRouter);
