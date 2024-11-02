@@ -52,12 +52,12 @@ class MovieController {
     }
   }
 
-  // static async bookingMovie(req, res) {
-  //   try {
-  //   } catch (error) {
-  //     res.status(500).json({ message: error.message });
-  //   }
-  // }
+  static async bookingMovie(req, res) {
+    try {
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
 }
 
 module.exports = MovieController;
