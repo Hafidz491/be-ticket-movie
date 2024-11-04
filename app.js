@@ -14,6 +14,9 @@ var userRouter = require("./routes/users");
 
 var app = express();
 
+// Static folder untuk menyajikan gambar
+app.use("/images", express.static(path.join(__dirname, "public/images")));
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");

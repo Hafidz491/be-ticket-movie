@@ -17,6 +17,10 @@ const movieSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  price: {
+    type: Number,
+    required: true,
+  },
   cast: {
     type: [String],
     required: true,

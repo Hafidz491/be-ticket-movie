@@ -2,16 +2,21 @@ const Movie = require("../models/Movie");
 
 class MovieController {
   static async addMovie(req, res) {
-    const { name, rating, year, description, producer, cast, imageUrl } =
-      req.body;
+    const { name, rating, year, price, description, producer, cast } = req.body;
 
-    const img = `uploads/${imageUrl}`;
+    console.log(req.file);
+    if (!req) {
+      return res.status(400).json({ message: "File gambar tidak diunggah" });
+    }
+
+    const imageUrl = req.file.path;
 
     const movie = new Movie({
-      imageUrl: img,
+      imageUrl,
       name,
       rating,
       year,
+      price,
       cast,
       producer,
       description,
