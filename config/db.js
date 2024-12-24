@@ -4,7 +4,7 @@ const connect = () => {
   mongoose
     .connect(process.env.MONGO_URI)
     .then(() => {
-      console.log("Listening on port 3000");
+      console.log("Listening on port 5000");
       console.log("MongoDB connected");
     })
     .catch((error) => {

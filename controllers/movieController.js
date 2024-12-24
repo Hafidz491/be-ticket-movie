@@ -1,4 +1,8 @@
 const Movie = require("../models/Movie");
+const Booking = require("../models/Booking");
+const User = require("../models/User");
+
+const path = require("path");
 
 class MovieController {
   static async addMovie(req, res) {
@@ -29,13 +33,36 @@ class MovieController {
     }
   }
 
+  // static async getMovies(req, res) {
+  //   try {
+  //     const listMovies = await Movie.find();
+  //     console.log(listMovies);
+  //     res.status(201).json({ movies: listMovies });
+  //   } catch (error) {
+  //     res.status(500).json({ message: error.message });
+  //   }
+  // }
+
   static async getMovies(req, res) {
     try {
       const listMovies = await Movie.find();
-      console.log(listMovies);
-      res.status(201).json(listMovies);
+
+      // Pastikan imageUrl valid sebelum memodifikasi
+      const updatedMovies = listMovies.map((movie) => {
+        const imageUrl = movie.imageUrl
+          ? `/images/${path.basename(movie.imageUrl)}` // Ambil nama file
+          : null; // Set null jika tidak ada imageUrl
+
+        return {
+          ...movie.toObject(), // Konversi ke object biasa
+          imageUrl,
+        };
+      });
+
+      res.status(201).json({ movies: updatedMovies }); // Kirim data yang sudah dimodifikasi
     } catch (error) {
-      res.status(500).json({ message: error.message });
+      console.error("Error in getMovies:", error); // Log error jika terjadi
+      res.status(500).json({ message: error.message }); // Kirim respons error
     }
   }
 
@@ -47,11 +74,13 @@ class MovieController {
       const movie = await Movie.findById(id);
 
       // checking movie id
-      if (!id) {
+      if (!movie) {
         res.status(404).json({ message: "Movie not found" });
       }
 
       res.status(201).json(movie);
+      console.log("Request received for movie ID:", req.params.id);
+      console.log("Movie found:", movie);
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
@@ -59,6 +88,7 @@ class MovieController {
 
   static async bookingMovie(req, res) {
     try {
+      const movie = await Movie.findById(req.params.id);
     } catch (error) {
       res.status(500).json({ message: error.message });
     }

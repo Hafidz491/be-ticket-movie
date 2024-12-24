@@ -4,7 +4,7 @@ const upload = require("../config/multerConfig");
 
 const router = express.Router();
 
-router.post("/", upload.single("imageUrl"), MovieController.addMovie);
+router.post("/add-movie", upload.single("imageUrl"), MovieController.addMovie);
 router.get("/all-movie", MovieController.getMovies);
 router.get("/detail/:id", MovieController.detailMovie);
 

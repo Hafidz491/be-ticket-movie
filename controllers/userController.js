@@ -28,6 +28,7 @@ class UserController {
 
       const newUser = await user.save();
       res.status(201).json(newUser);
+      console.log("Berhasil Membuat akun!");
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
@@ -43,6 +44,7 @@ class UserController {
 
       //   check if user exists
       const user = await User.findOne({ email });
+      console.log("Login Berhasil!");
       if (!user) {
         return res.status(400).json({ msg: "User does not exist!" });
       }
