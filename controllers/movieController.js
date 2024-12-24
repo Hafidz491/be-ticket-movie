@@ -51,7 +51,7 @@ class MovieController {
       const updatedMovies = listMovies.map((movie) => {
         const imageUrl = movie.imageUrl
           ? `/images/${path.basename(movie.imageUrl)}` // Ambil nama file
-          : null; // Set null jika tidak ada imageUrl
+          : null;
 
         return {
           ...movie.toObject(), // Konversi ke object biasa
@@ -78,9 +78,15 @@ class MovieController {
         res.status(404).json({ message: "Movie not found" });
       }
 
-      res.status(201).json(movie);
-      console.log("Request received for movie ID:", req.params.id);
-      console.log("Movie found:", movie);
+      const imageUrl = movie.imageUrl
+        ? `/images/${path.basename(movie.imageUrl)}`
+        : null;
+
+      const updateDetailMovie = {
+        ...movie.toObject(),
+        imageUrl,
+      };
+      res.status(201).json(updateDetailMovie);
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
