@@ -12,6 +12,7 @@ dotenv.config();
 var indexRouter = require("./routes/index");
 var movieRouter = require("./routes/movie");
 var userRouter = require("./routes/users");
+var bookingRouter = require("./routes/booking");
 
 var app = express();
 const port = process.env.PORT || 5000;
@@ -37,6 +38,7 @@ db.connect();
 app.use("/", indexRouter);
 app.use("/movie", movieRouter);
 app.use("/user", userRouter);
+app.use("/booking", bookingRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
