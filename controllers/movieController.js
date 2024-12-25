@@ -91,14 +91,6 @@ class MovieController {
       res.status(500).json({ message: error.message });
     }
   }
-
-  static async bookingMovie(req, res) {
-    try {
-      const movie = await Movie.findById(req.params.id);
-    } catch (error) {
-      res.status(500).json({ message: error.message });
-    }
-  }
 }
 
 module.exports = MovieController;
