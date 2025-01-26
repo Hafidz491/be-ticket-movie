@@ -3,6 +3,6 @@ const BookingController = require("../controllers/bookingController");
 
 const router = express.Router();
 
-router.post("/booking-movie", BookingController.bookingMovie);
+router.post("/detail/:id/booking", BookingController.bookingMovie);
 
 module.exports = router;
